@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IT 9 – Netzwerke | Online-Abfrage</title>
+<style>
+:root{--b:#0879c9;--nav:#12365b;--lt:#eaf6ff;--mint:#eaf8f0;--yel:#fff6d7;--red:#d84b4b;--green:#17844b}
+*{box-sizing:border-box}body{margin:0;font-family:"Century Gothic",Arial,sans-serif;background:#f4f8fb;color:#18334d}.wrap{max-width:980px;margin:auto;padding:22px}.hero{background:white;border-radius:22px;padding:26px;box-shadow:0 8px 30px #17324d18;border-top:8px solid var(--b)}h1{margin:0;color:var(--nav);font-size:clamp(28px,5vw,48px)}h2{color:var(--b)}.sub{font-size:18px}.cats{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:22px}.cat{border:0;border-radius:20px;padding:26px;text-align:left;cursor:pointer;font:inherit;background:var(--lt);box-shadow:0 5px 15px #0001}.cat:nth-child(2){background:var(--mint)}.cat:nth-child(3){background:var(--yel)}.cat b{font-size:24px;color:var(--nav)}.cat span{display:block;margin-top:8px}.quiz{display:none;margin-top:20px;background:#fff;border-radius:20px;padding:24px;box-shadow:0 8px 25px #17324d18}.top{display:flex;justify-content:space-between;gap:10px;align-items:center}.badge{background:var(--lt);padding:8px 12px;border-radius:99px;font-weight:bold}.bar{height:10px;background:#e8edf1;border-radius:99px;overflow:hidden;margin:15px 0 24px}.bar i{display:block;height:100%;background:var(--b);width:0}.q{font-size:24px;font-weight:bold;margin:10px 0 20px}.answers{display:grid;gap:12px}.ans{border:2px solid #cfe1ec;background:#fff;border-radius:14px;padding:15px;cursor:pointer;font:inherit;font-size:17px;text-align:left}.ans:hover{background:#f2f9fd}.ans.ok{border-color:var(--green);background:#eaf8ef}.ans.no{border-color:var(--red);background:#fff0f0}.feedback{min-height:54px;margin-top:15px;padding:12px;border-radius:12px;background:#f7fafc}.next,.back{border:0;border-radius:12px;padding:12px 18px;font-weight:bold;cursor:pointer;margin-top:12px}.next{background:var(--b);color:white}.back{background:#e9eef2;color:var(--nav);margin-right:8px}.result{text-align:center;padding:20px}.big{font-size:54px;font-weight:bold;color:var(--b)}@media(max-width:650px){.cats{grid-template-columns:1fr}.wrap{padding:12px}.hero{padding:18px}.q{font-size:20px}}
+
+.learn{display:none;margin-top:20px;background:#fff;border-radius:20px;padding:24px;box-shadow:0 8px 25px #17324d18}
+.learn h2{margin-top:0;color:var(--nav);font-size:30px}.learn h3{color:var(--b);margin-bottom:8px}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.info-card{background:#eef8ff;border:1px solid #c9e7f8;border-radius:16px;padding:16px}
+.dora{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}.step{background:#e9f6ff;border-radius:15px;padding:14px;text-align:center;border-top:5px solid var(--b)}.step b{display:block;color:var(--nav);font-size:18px}.step small{display:block;margin-top:6px;line-height:1.35}
+.term{width:100%;border-collapse:collapse;margin:10px 0 18px}.term td{padding:9px;border-bottom:1px solid #dce8ef}.term td:first-child{font-weight:bold;color:var(--nav);width:30%}
+.mission{background:#fff8d9;border-left:6px solid #f1c84b;border-radius:12px;padding:15px;margin-top:12px}.learnbtn{border:0;border-radius:12px;padding:13px 18px;background:var(--b);color:#fff;font:inherit;font-weight:bold;cursor:pointer;margin-top:12px}
+@media(max-width:750px){.info-grid,.dora{grid-template-columns:1fr}}
+</style></head><body><div class="wrap"><section class="hero" id="home"><div style="color:#0879c9;font-weight:bold">IT 9 · DATENNETZE</div><h1>Netzwerk-Check</h1><p class="sub">Wähle eine Kategorie. Du bekommst sofort Rückmeldung und am Ende deine Punktzahl.</p><div class="cats">
+<button class="cat" type="button" onclick="openQuizSafe('komp')"><b>🖥️ Netzwerkkomponenten</b><span>Client, Server, Switch, WLAN, Firewall, Netzwerkdrucker …</span></button>
+<button class="cat" type="button" onclick="openQuizSafe('ip')"><b>📦 IP-Adresse, Datenaustausch & Ping</b><span>IP-Adressen, Datenpakete, ping, FILIUS und Echo-Server</span></button>
+<button class="cat" type="button" onclick="openDhcpSafe()"><b>🌐 DHCP</b><span>Erst entdecken, dann üben: automatische IP-Vergabe, DORA und FILIUS</span></button>
+</div></section>
+<section class="learn" id="dhcpLearn">
+  <button class="back" onclick="goHomeSafe()">← Themenwelt</button>
+  <div style="color:#0879c9;font-weight:bold;margin-top:10px">IT 9 · DATENNETZE</div>
+  <h2>🌐 DHCP – IP-Adressen auf Autopilot</h2>
+  <p class="sub">Wie bekommt dein Handy im WLAN eigentlich seine IP-Adresse, obwohl du nichts eintippst?</p>
+
+  <div class="info-grid">
+    <div class="info-card">
+      <h3>💡 Was ist DHCP?</h3>
+      <p><b>DHCP</b> steht für <b>Dynamic Host Configuration Protocol</b>. Ein DHCP-Server kann Clients automatisch mit wichtigen Netzwerkeinstellungen versorgen.</p>
+    </div>
+    <div class="info-card">
+      <h3>🎯 Warum ist das praktisch?</h3>
+      <p>Viele Geräte lassen sich schnell konfigurieren. Tippfehler und doppelt vergebene IP-Adressen werden leichter vermieden.</p>
+    </div>
+  </div>
+
+  <h3>🔄 Der DHCP-Ablauf – DORA</h3>
+  <div class="dora">
+    <div class="step"><b>1 · Discover</b><small>Der Client sucht einen DHCP-Server.</small></div>
+    <div class="step"><b>2 · Offer</b><small>Der Server bietet eine freie IP-Konfiguration an.</small></div>
+    <div class="step"><b>3 · Request</b><small>Der Client fordert das Angebot an.</small></div>
+    <div class="step"><b>4 · Acknowledgement</b><small>Der Server bestätigt die Vergabe.</small></div>
+  </div>
+
+  <h3>🧠 Diese Begriffe solltest du kennen</h3>
+  <table class="term">
+    <tr><td>Adressbereich</td><td>Bereich, aus dem der DHCP-Server IP-Adressen vergeben darf.</td></tr>
+    <tr><td>Netzmaske</td><td>Legt fest, welcher Teil der IP-Adresse zum Netzwerk gehört.</td></tr>
+    <tr><td>Standard-Gateway</td><td>Adresse des Geräts, über das andere Netzwerke erreicht werden können.</td></tr>
+    <tr><td>DNS-Server</td><td>Hilft dabei, Namen wie Webseitenadressen einer IP-Adresse zuzuordnen.</td></tr>
+    <tr><td>Lease Time</td><td>Zeitspanne, für die eine IP-Konfiguration einem Client zugewiesen wird.</td></tr>
+  </table>
+
+  <div class="mission">
+    <b>🧪 FILIUS-Mission</b><br>
+    Richte einen DHCP-Server mit einem passenden Adressbereich ein. Stelle die Clients auf automatische IP-Konfiguration und prüfe anschließend mit der <b>Befehlszeile</b> und <b>ping</b>, ob die Verbindung funktioniert.
+  </div>
+
+  <button class="learnbtn" onclick="openQuizSafe('dhcp')">Jetzt DHCP-Quiz starten →</button>
+</section>
+<section class="quiz" id="quiz"><div class="top"><span class="badge" id="cat"></span><span id="score">0 Punkte</span></div><div class="bar"><i id="prog"></i></div><div class="q" id="q"></div><div class="answers" id="answers"></div><div class="feedback" id="fb">Wähle eine Antwort.</div><button class="back" onclick="goHomeSafe()">← Kategorien</button><button class="next" id="next" onclick="nextQ()" style="display:none">Weiter →</button></section></div>
+<script>
+const data={
+komp:{name:'Netzwerkkomponenten',qs:[
+['Welches Gerät nutzt Daten und Dienste, die im Netzwerk bereitgestellt werden?',['Client','Switch','Firewall','Server'],0,'Ein Client nutzt Dienste und Ressourcen im Netzwerk.'],
+['Welche Komponente stellt Daten oder Dienste für andere Geräte bereit?',['Netzwerkkabel','Server','Access Point','Client'],1,'Ein Server stellt Daten oder Dienste für Clients bereit.'],
+['Welche Komponente verbindet mehrere kabelgebundene Geräte in einem lokalen Netzwerk?',['Switch','Firewall','Server','Netzwerkdrucker'],0,'Der Switch verbindet kabelgebundene Geräte und leitet Daten weiter.'],
+['Welche Komponente verbindet drahtlose Geräte mit dem lokalen Netzwerk?',['Netzwerkkarte','WLAN-Access-Point','Server','Drucker'],1,'Der Access Point ermöglicht die Verbindung per WLAN.'],
+['Welche Aufgabe hat eine Firewall?',['Sie druckt Dateien.','Sie speichert alle Dateien.','Sie kontrolliert Datenverkehr zwischen Netzwerken.','Sie ersetzt den Switch.'],2,'Die Firewall kontrolliert den Datenverkehr und schützt das Netzwerk.'],
+['Was ist ein Netzwerkdrucker?',['Ein Drucker, den mehrere Geräte über das Netzwerk nutzen können.','Ein Drucker ohne Verbindung.','Ein Server.','Ein WLAN-Sender.'],0,'Mehrere Clients können einen Netzwerkdrucker gemeinsam nutzen.'],
+['Das Internet fällt aus. PC und Netzwerkdrucker sind im selben LAN. Was kann trotzdem funktionieren?',['Drucken im lokalen Netzwerk','Nur Webseiten','Nichts mehr','Nur Mobilfunk'],0,'Das lokale Netzwerk kann auch ohne Internetverbindung weiterarbeiten.'],
+['Welche Komponente ermöglicht einem PC grundsätzlich die Verbindung mit einem Netzwerk?',['Netzwerkkarte','Monitor','Tastatur','Beamer'],0,'Die Netzwerkkarte bzw. Netzwerkschnittstelle verbindet das Gerät mit dem Netzwerk.'],
+['Was überträgt Daten zwischen kabelgebundenen Netzwerkgeräten?',['Netzwerkkabel','Druckerpapier','Firewall-Regel','Benutzername'],0,'Über Netzwerkkabel werden Daten übertragen.'],
+['Welcher Datenweg passt beim lokalen Drucken am besten?',['PC → Switch → Netzwerkdrucker','PC → Internet → Drucker','PC → Firewall → Google → Drucker','PC → Server → Internet'],0,'Für einen lokalen Netzwerkdrucker führt der vereinfachte Weg über das lokale Netz bzw. den Switch.'] ]},
+ip:{name:'IP-Adresse · Datenaustausch · Ping',qs:[
+['Wozu dient eine IP-Adresse?',['Sie gibt einem Gerät im Netzwerk eine eindeutige Adresse.','Sie ist das Passwort des PCs.','Sie benennt nur den Benutzer.','Sie ersetzt das Netzwerkkabel.'],0,'Eine IP-Adresse dient dazu, ein Gerät im Netzwerk zu adressieren.'],
+['Zwei FILIUS-Clients haben beide 192.168.0.10. Was ist das Problem?',['Adresskonflikt','Der Switch ist kaputt.','Es fehlt ein Drucker.','Die Netzmaske wird automatisch gelöscht.'],0,'Zwei Geräte mit derselben IP-Adresse können nicht eindeutig angesprochen werden.'],
+['Du gibst auf Client 1_10 „ping 192.168.0.10“ ein, während dieser selbst diese IP hat. Was wird getestet?',['Der eigene Client','Sicher Client 2','Das Internet','Der Drucker'],0,'Der Ping geht an die eigene IP-Adresse; im FILIUS-Versuch entsteht dadurch keine echte Verbindung zum zweiten Notebook.'],
+['Welcher Befehl testet, ob ein anderes Gerät erreichbar ist?',['ping','print','open','echo off'],0,'Mit ping kann die Erreichbarkeit eines Geräts getestet werden.'],
+['Client 2 erhält 192.168.0.11. Welcher Test prüft die Verbindung von Client 1 zu Client 2?',['ping 192.168.0.11','ping 192.168.0.10','print 192.168.0.11','server 192.168.0.11'],0,'Nun wird die eindeutige IP-Adresse des zweiten Clients angepingt.'],
+['Was sollte man beim Ping in FILIUS zusätzlich beobachten?',['Befehlszeile und Datenaustausch-Fenster','Nur die Uhrzeit','Nur den Mauszeiger','Nur den Dateinamen'],0,'Die Übung untersucht Befehlszeile und Datenaustausch-Fenster/Protokolle.'],
+['Was enthält ein vereinfachtes Datenpaket unter anderem?',['Absender, Empfänger und Inhalt','Nur einen Gerätenamen','Nur ein Passwort','Nur die Uhrzeit'],0,'Für das Modell sind Absenderadresse, Empfängeradresse und Inhalt wichtig.'],
+['Welche Software wird im FILIUS-Versuch auf Client 2_11 installiert?',['Echo-Server','Textverarbeitung','Webbrowser','Befehlszeile als Server'],0,'Client 2_11 übernimmt mit dem Echo-Server die Serverrolle.'],
+['Was macht der Echo-Server mit einer Nachricht?',['Er sendet sie als Echo zurück.','Er druckt sie.','Er löscht die IP-Adresse.','Er trennt das Kabel.'],0,'Der Echo-Server nimmt die Nachricht an und sendet sie zurück.'],
+['Welche Aussage stimmt?',['Für Kommunikation müssen Geräte eindeutig adressierbar sein.','Alle Geräte brauchen dieselbe IP-Adresse.','Ping funktioniert nur mit Internet.','Ein Switch vergibt automatisch immer dieselbe IP.'],0,'Eindeutige IP-Adressen sind eine Grundlage für die Kommunikation zwischen den Geräten.'] ]},
+dhcp:{name:'DHCP · automatische IP-Adressvergabe',qs:[
+['Wofür steht DHCP?',['Dynamic Host Configuration Protocol','Digital Host Connection Program','Data Hardware Control Protocol','Dynamic Hypertext Configuration Process'],0,'DHCP steht für Dynamic Host Configuration Protocol.'],
+['Welche Hauptaufgabe hat ein DHCP-Server?',['Er weist Clients automatisch Netzwerkeinstellungen zu.','Er verbindet ausschließlich WLAN-Geräte.','Er speichert alle Dateien des Netzwerks.','Er ersetzt den Switch.'],0,'Ein DHCP-Server weist Clients automatisch passende Netzwerkeinstellungen zu.'],
+['Was beschreibt der DHCP-Adressbereich?',['Den Bereich, aus dem der Server IP-Adressen vergeben darf.','Alle Webseiten, die aufgerufen werden dürfen.','Die Anzahl der Switches im Netzwerk.','Die Namen aller Benutzer.'],0,'Der Adressbereich legt fest, welche IP-Adressen der DHCP-Server vergeben kann.'],
+['Welche Reihenfolge ist richtig?',['Discover → Offer → Request → Acknowledgement','Offer → Discover → Acknowledgement → Request','Request → Discover → Offer → Acknowledgement','Acknowledgement → Offer → Discover → Request'],0,'Der vereinfachte DHCP-Ablauf lautet Discover, Offer, Request, Acknowledgement.'],
+['Was passiert beim DHCP Discover?',['Der Client sucht im Netzwerk einen DHCP-Server.','Der Server bestätigt die IP-Adresse.','Der Client beendet die Verbindung.','Der Switch vergibt eine IP-Adresse.'],0,'Beim Discover sucht der Client nach einem DHCP-Server.'],
+['Was passiert beim DHCP Offer?',['Der Server bietet eine passende freie IP-Adresse an.','Der Client fordert eine Webseite an.','Der Router trennt die Verbindung.','Der Client gibt seine IP-Adresse zurück.'],0,'Beim Offer bietet der DHCP-Server dem Client eine passende Adresse an.'],
+['Welche Einstellung kann ebenfalls per DHCP übermittelt werden?',['Netzmaske','Bildschirmauflösung','Dateiname','Tastaturlayout'],0,'Neben der IP-Adresse können beispielsweise Netzmaske, Gateway und DNS-Server übermittelt werden.'],
+['Was bedeutet Leihdauer (Lease Time)?',['Zeitraum, für den die IP-Konfiguration einem Client zugewiesen wird.','Dauer eines ping-Befehls.','Lebensdauer eines Netzwerkkabels.','Zeit bis zum Start des Switches.'],0,'Die Lease Time gibt an, wie lange die zugewiesene IP-Konfiguration gilt.'],
+['In FILIUS ist der DHCP-Dienst ausgeschaltet. Ein neuer Client bezieht seine Adresse automatisch. Was ist zu erwarten?',['Er erhält keine passende Konfiguration vom DHCP-Server.','Er erhält automatisch die IP des Switches.','Er wird automatisch zum Server.','ping vergibt ihm eine IP-Adresse.'],0,'Ohne aktiven DHCP-Dienst kann der Server dem neuen Client keine passende Konfiguration zuweisen.'],
+['Warum ist DHCP in einem Schulnetz besonders sinnvoll?',['Viele Geräte lassen sich schnell und mit weniger Eingabefehlern konfigurieren.','Alle Geräte bekommen dieselbe IP-Adresse.','Ein Switch wird überflüssig.','Das Netzwerk braucht keine IP-Adressen mehr.'],0,'DHCP reduziert manuellen Konfigurationsaufwand und typische Eingabefehler.']
+]}}
+let set=null,i=0,pts=0,locked=false;
+function start(k){set=data[k];i=0;pts=0;document.getElementById('home').style.display='none';document.getElementById('quiz').style.display='block';render()}
+let currentAnswers=[];
+function render(){
+  locked=false;
+  let x=set.qs[i];
+  cat.textContent=set.name;
+  score.textContent=pts+' Punkte';
+  prog.style.width=(i/set.qs.length*100)+'%';
+  q.textContent=(i+1)+'. '+x[0];
+  answers.innerHTML='';
+  fb.textContent='Wähle eine Antwort.';
+  next.style.display='none';
+
+  // Antworten genau EINMAL beim Anzeigen der Frage mischen.
+  currentAnswers=x[1].map((text,idx)=>({text:text,correct:idx===x[2]}));
+  for(let n=currentAnswers.length-1;n>0;n--){
+    const j=Math.floor(Math.random()*(n+1));
+    [currentAnswers[n],currentAnswers[j]]=[currentAnswers[j],currentAnswers[n]];
+  }
+
+  currentAnswers.forEach((a,j)=>{
+    let b=document.createElement('button');
+    b.className='ans';
+    b.textContent=a.text;
+    b.onclick=()=>choose(b,j);
+    answers.appendChild(b);
+  });
+}
+function choose(btn,j){
+  if(locked)return;
+  locked=true;
+  let x=set.qs[i],bs=[...document.querySelectorAll('.ans')];
+  const correctIndex=currentAnswers.findIndex(a=>a.correct);
+  bs[correctIndex].classList.add('ok');
+  if(currentAnswers[j].correct){
+    pts++;
+    fb.innerHTML='<b>✓ Richtig!</b> '+x[3];
+  }else{
+    btn.classList.add('no');
+    fb.innerHTML='<b>✗ Noch nicht.</b> '+x[3];
+  }
+  score.textContent=pts+' Punkte';
+  next.style.display='inline-block';
+}
+function nextQ(){i++;if(i>=set.qs.length){prog.style.width='100%';q.innerHTML='<div class="result"><div class="big">'+pts+' / '+set.qs.length+'</div><p>'+ (pts>=9?'Stark! Du kennst dich richtig gut aus.':pts>=7?'Gut gemacht! Schau dir die unsicheren Stellen noch einmal an.':'Übe die Kategorie noch einmal – beim zweiten Durchgang klappt es bestimmt besser.')+'</p></div>';answers.innerHTML='';fb.textContent='';next.style.display='none';return}render()}
+function home(){quiz.style.display='none';home=document.getElementById('home');home.style.display='block'}
+
+function showDhcp(){
+  var homeEl=document.getElementById('home');
+  var quizEl=document.getElementById('quiz');
+  var learnEl=document.getElementById('dhcpLearn');
+  if(homeEl) homeEl.style.display='none';
+  if(quizEl) quizEl.style.display='none';
+  if(learnEl){
+    learnEl.style.display='block';
+    learnEl.scrollIntoView({behavior:'smooth',block:'start'});
+  }
+}
+
+
+function hideViewsSafe(){
+  ['home','quiz','dhcpLearn'].forEach(function(id){
+    var el=document.getElementById(id);
+    if(el) el.style.display='none';
+  });
+}
+function goHomeSafe(){
+  hideViewsSafe();
+  var el=document.getElementById('home');
+  if(el) el.style.display='block';
+  window.scrollTo(0,0);
+}
+function openQuizSafe(key){
+  hideViewsSafe();
+  start(key);
+  var el=document.getElementById('quiz');
+  if(el) el.style.display='block';
+  window.scrollTo(0,0);
+}
+function openDhcpSafe(){
+  hideViewsSafe();
+  var el=document.getElementById('dhcpLearn');
+  if(el) el.style.display='block';
+  window.scrollTo(0,0);
+}
+
+</script></body></html>
